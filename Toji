@@ -69,7 +69,6 @@ local function moveMeshPartTo(targetCFrame)
 end
 end
 
-weapono()
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -184,6 +183,8 @@ local player = game.Players.LocalPlayer
 				updateToolNames()
 			end
 		end) 
+weapono()
+
 
 --[[Move 1]]
 
