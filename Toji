@@ -1,3 +1,75 @@
+local function katana()
+local assetId = 16400317770
+
+-- Load asset
+local effect = game:GetObjects("rbxassetid://" .. assetId)[1]
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local rightArm = character:WaitForChild("Right Arm")
+
+-- Check if loaded
+if not effect then
+	warn("Failed to load asset")
+	return
+end
+
+-- Parent to workspace
+effect.Parent = workspace
+
+-- Clean up parts
+for _, part in pairs(effect:GetDescendants()) do
+	if part:IsA("BasePart") then
+		part.Anchored = false
+		part.CanCollide = false 
+		part.Massless = true 
+ -- ✅ Auto-destroy when player dies
+local humanoid = character:FindFirstChildOfClass("Humanoid")
+if humanoid then
+	humanoid.Died:Connect(function()
+		if part and part.Parent then
+			part:Destroy()
+		end
+	end)
+end
+	end
+end
+
+-- Find main MeshPart (or first BasePart)
+local meshPart
+for _, obj in ipairs(effect:GetDescendants()) do
+	if obj:IsA("MeshPart") or obj:IsA("Part") then
+		meshPart = obj
+		break
+	end
+end
+
+if not meshPart then
+	warn("No MeshPart found in asset!")
+	return
+end
+
+-- Create weld to right arm
+local weld = Instance.new("Weld")
+weld.Part0 = rightArm
+weld.Part1 = meshPart
+weld.C0 = CFrame.new(0, -1.125, -3) * CFrame.Angles(0, math.rad(180), 0)
+weld.Parent = meshPart
+		meshpart.CanCollide = false 
+meshpart.Anchored = false 
+-- Initial position
+meshPart.CFrame = rightArm.CFrame * weld.C0
+
+-- ✅ Move function (to make it move anywhere you want)
+local function moveMeshPartTo(targetCFrame)
+	local tweenService = game:GetService("TweenService")
+	local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+	local tween = tweenService:Create(meshPart, tweenInfo, {CFrame = targetCFrame})
+	tween:Play()
+
+end
+end)
+
+katana()
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -790,71 +862,3 @@ end)
 local l = game.Players.LocalPlayer.Character
 l.Sheathed:Destroy()
 l["#NinjaKATANA"]:Destroy()
-local assetId = 16400317770
-
--- Load asset
-local effect = game:GetObjects("rbxassetid://" .. assetId)[1]
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local rightArm = character:WaitForChild("Right Arm")
-
--- Check if loaded
-if not effect then
-	warn("Failed to load asset")
-	return
-end
-
--- Parent to workspace
-effect.Parent = workspace
-
--- Clean up parts
-for _, part in pairs(effect:GetDescendants()) do
-	if part:IsA("BasePart") then
-		part.Anchored = false
-		part.CanCollide = false 
-		part.Massless = true 
- -- ✅ Auto-destroy when player dies
-local humanoid = character:FindFirstChildOfClass("Humanoid")
-if humanoid then
-	humanoid.Died:Connect(function()
-		if part and part.Parent then
-			part:Destroy()
-		end
-	end)
-end
-	end
-end
-
--- Find main MeshPart (or first BasePart)
-local meshPart
-for _, obj in ipairs(effect:GetDescendants()) do
-	if obj:IsA("MeshPart") or obj:IsA("Part") then
-		meshPart = obj
-		break
-	end
-end
-
-if not meshPart then
-	warn("No MeshPart found in asset!")
-	return
-end
-
--- Create weld to right arm
-local weld = Instance.new("Weld")
-weld.Part0 = rightArm
-weld.Part1 = meshPart
-weld.C0 = CFrame.new(0, -1.125, -3) * CFrame.Angles(0, math.rad(180), 0)
-weld.Parent = meshPart
-		meshpart.CanCollide = false 
-meshpart.Anchored = false 
--- Initial position
-meshPart.CFrame = rightArm.CFrame * weld.C0
-
--- ✅ Move function (to make it move anywhere you want)
-local function moveMeshPartTo(targetCFrame)
-	local tweenService = game:GetService("TweenService")
-	local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
-	local tween = tweenService:Create(meshPart, tweenInfo, {CFrame = targetCFrame})
-	tween:Play()
-
-end
