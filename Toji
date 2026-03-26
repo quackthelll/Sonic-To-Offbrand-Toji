@@ -1,3 +1,7 @@
+local l = game.Players.LocalPlayer.Character
+l.Sheathed:Destroy()
+l["#NinjaKATANA"]:Destroy()
+
 local function weapono()
 local assetId = 16400317770
 
@@ -858,8 +862,3 @@ uis.InputBegan:Connect(function(input, gameProcessed)
         end
     end
 end)
-
--- this for sonic 
-local l = game.Players.LocalPlayer.Character
-l.Sheathed:Destroy()
-l["#NinjaKATANA"]:Destroy()
