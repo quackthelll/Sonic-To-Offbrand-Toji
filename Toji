@@ -1,4 +1,4 @@
-local function katana()
+local function weapono()
 local assetId = 16400317770
 
 -- Load asset
@@ -69,7 +69,7 @@ local function moveMeshPartTo(targetCFrame)
 end
 end
 
-katana()
+weapono()
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
