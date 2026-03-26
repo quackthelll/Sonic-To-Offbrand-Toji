@@ -67,7 +67,7 @@ local function moveMeshPartTo(targetCFrame)
 	tween:Play()
 
 end
-end)
+end
 
 katana()
 local Players = game:GetService("Players")
